@@ -1,0 +1,6 @@
+2022-11-30T21:06:45 | info | Prueba de log con info
+2022-11-30T21:06:45 | error | Prueba de log con error
+2022-11-30T21:09:36 | info | Prueba de log con info
+2022-11-30T21:09:36 | error | Prueba de log con error
+{"time": "2022-11-30T21:10:05", "level": "info", "message": "Prueba de log con info"}
+{"time": "2022-11-30T21:10:05", "level": "error", "message": "Prueba de log con error"}
