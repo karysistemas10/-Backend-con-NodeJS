@@ -1,0 +1,3 @@
+2022-12-07T19:28:41 | error | Error al conectarse a la BD: Cannot read properties of undefined (reading 'authenticate')
+2022-12-07T19:31:23 | error | Error al conectarse a la BD: Cannot read properties of undefined (reading 'authenticate')
+2022-12-07T19:31:57 | error | Error al conectarse a la BD: Cannot read properties of undefined (reading 'authenticate')

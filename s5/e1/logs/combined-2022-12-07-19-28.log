@@ -1,0 +1,5 @@
+2022-12-07T19:28:16 | info | Conexion establecida
+2022-12-07T19:28:18 | info | Conexion establecida
+2022-12-07T19:28:23 | info | Conexion establecida
+2022-12-07T19:28:28 | info | Conexion establecida
+2022-12-07T19:28:41 | error | Error al conectarse a la BD: Cannot read properties of undefined (reading 'authenticate')
