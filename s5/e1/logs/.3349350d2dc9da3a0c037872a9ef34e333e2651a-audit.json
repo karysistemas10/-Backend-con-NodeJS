@@ -149,6 +149,51 @@
             "date": 1670468243046,
             "name": "logs/combined-2022-12-07-20-57.log",
             "hash": "cb14a93d310d22f7e5def534586bc41f0115b1ce56b78126dc1fd6276a62c79e"
+        },
+        {
+            "date": 1670469399405,
+            "name": "logs/combined-2022-12-07-21-16.log",
+            "hash": "e92e5be5d2a1b10d55dd529fd22c5529ab1f1c21d404c31a30fdfc5724fd08d8"
+        },
+        {
+            "date": 1670469509941,
+            "name": "logs/combined-2022-12-07-21-18.log",
+            "hash": "a38b3ac221d700849872015e6dcc97a388223f0126900d899af47a2409c59487"
+        },
+        {
+            "date": 1670469632900,
+            "name": "logs/combined-2022-12-07-21-20.log",
+            "hash": "16a88e27a2ac3e4c3043bc7c377f60577c96ff593758d6696abbf2a033390b34"
+        },
+        {
+            "date": 1670470572552,
+            "name": "logs/combined-2022-12-07-21-36.log",
+            "hash": "ba1df2fe321038fd4192e901da1352a64b3bc5683ad0f41a7386aedc8a8f0d1a"
+        },
+        {
+            "date": 1670470659496,
+            "name": "logs/combined-2022-12-07-21-37.log",
+            "hash": "526393a7d2ae3985054c80d3551c33fcc274afe51290aa2637de47f343977b75"
+        },
+        {
+            "date": 1670470680251,
+            "name": "logs/combined-2022-12-07-21-38.log",
+            "hash": "a580f3671973907e94b1190e937568795ec5157373fc359d6457959a270558b2"
+        },
+        {
+            "date": 1670470744614,
+            "name": "logs/combined-2022-12-07-21-39.log",
+            "hash": "efaadb9f772b8f9757a5b9055f5b09c36a879f11dd5cc96e8ab36b4c5e56e200"
+        },
+        {
+            "date": 1670471171681,
+            "name": "logs/combined-2022-12-07-21-46.log",
+            "hash": "52d0dd253f9a407509200d580792dbd74a6085de9336ee8a85a6fa8d5f950941"
+        },
+        {
+            "date": 1670471222045,
+            "name": "logs/combined-2022-12-07-21-47.log",
+            "hash": "b2f10a679fa3c09f11639e6f6fb1912f653f7b93366e722cc427e7bbd0bf81c8"
         }
     ],
     "hashType": "sha256"

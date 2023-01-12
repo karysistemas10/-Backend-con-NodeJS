@@ -1,33 +1,38 @@
 "use strict";
 
 require("dotenv/config");
-var _sequelize = require("sequelize");
 var _db = require("./db");
-var _Book = _interopRequireDefault(require("./db/model/Book"));
 var _logger = require("./logger");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-//import { Console } from 'winston/lib/winston/transports'
+var _apolloServer = require("apollo-server");
+var _schema = require("./schema");
+var _resolver = require("./resolver");
+// Ejemplo y reto 1
+// const connection = async () => {
+//   try {
+//     await sequelize.authenticate()
+//     logger.info('Conexión establecida!!!')
+//     console.log(await sequelize.models.Book.findAll());
+//     const book = await sequelize.models.Book.create({
+//       asin: 'B0001244HBN',
+//       title: 'NodeJS',
+//       author: 'Beto',
+//       pages: 200
+//     });
+//     console.log(book);
+//     console.log(await sequelize.models.Book.findAll());
+//   } catch (error) {
+//     logger.error('Error al conectarse a la DB:', error)
+//   }
+// }
+// connection()
 
-//import Book from './db/model/Book'
-
-const connection = async () => {
-  try {
-    await _db.sequelize.authenticate();
-    _logger.logger.info('Conexion establecida');
-    console.log(_db.sequelize.models.Book);
-    console.log(await _db.sequelize.models.Book.findAll());
-    const book = await _db.sequelize.models.Book.create({
-      asin: '162839BSD',
-      title: 'Hola Mundo',
-      author: 'Ricardo Lopez',
-      pages: 100
-    }, {
-      fields: ['id', 'asin', 'title', 'author', 'pages']
-    });
-    console.log(book);
-    console.log(await _db.sequelize.models.Book.findAll());
-  } catch (error) {
-    _logger.logger.error('Error al conectarse a la BD:', error);
-  }
-};
-connection();
+// Ejemplo 02
+const server = new _apolloServer.ApolloServer({
+  typeDefs: _schema.typeDefs,
+  resolvers: _resolver.resolvers
+});
+server.listen().then(({
+  url
+}) => {
+  _logger.logger.info(`🚀  Servidor listo en ${url}, inicializado en ${process.env.NODE_ENV} a las ${new Date().toISOString()}`);
+});
