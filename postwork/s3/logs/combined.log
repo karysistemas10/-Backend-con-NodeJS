@@ -1,0 +1,4 @@
+{"level":"info","message":"Prueba de log con info","service":"user-service"}
+{"level":"error","message":"Prueba de log con error","service":"user-service"}
+23Y-01-16T00:54:59 | info | Prueba de log con info
+23Y-01-16T00:54:59 | error | Prueba de log con error
