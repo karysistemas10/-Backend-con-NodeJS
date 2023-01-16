@@ -1,28 +1,64 @@
 "use strict";
 
-const resolver = {
-  saludo: () => 'Hola Kary!',
-  getLive: ({
-    id
-  }) => lives.find(b => b.id == id),
-  getAllLives: () => lives
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.resolvers = void 0;
+var _db = require("./db");
+var _logger = require("./logger");
+var _apolloServerErrors = require("apollo-server-errors");
+const resolvers = {
+  Query: {
+    getAllLives: async () => await _db.sequelize.models.Live.findAll(),
+    getLive: async (_, {
+      id
+    }) => {
+      return await _db.sequelize.models.Live.findOne({
+        where: {
+          id
+        }
+      });
+    }
+  },
+  Mutation: {
+    insertLive: async (_, {
+      id,
+      title,
+      picture,
+      date
+    }) => {
+      return await _db.sequelize.models.Live.create({
+        id,
+        title,
+        picture,
+        date
+      });
+    },
+    updateLive: async (_, {
+      id,
+      title,
+      picture,
+      date
+    }) => {
+      // buscamos el libro con base al asin proporcionado
+      let liveFound = await _db.sequelize.models.Live.findOne({
+        where: {
+          id
+        }
+      });
+      // Sino lo encontramos lanzamos un error
+      if (!liveFound) {
+        _logger.logger.error(`Live not found with asin: ${id}`);
+        throw new _apolloServerErrors.ApolloError('Live not found', 'ERR003');
+      }
+      // En caso de encontrarlo actualizamos las propiedades que no vengan nulas
+      title && (liveFound.title = title);
+      picture && (liveFound.picture = picture);
+      date && (liveFound.date = date);
+      // Actualizamos el libro
+      liveFound.save();
+      return liveFound;
+    }
+  }
 };
-const lives = [{
-  id: 1,
-  title: 'Transformación Digital: ¿En qué etapa va tu empresa?',
-  picture: "https://assets-bedu.org/images/Panel_26_ENE.png",
-  date: "2022-01-27"
-}, {
-  id: 2,
-  title: 'The Matrix: ¿Sería posible con Inteligencia Artificial?',
-  picture: "https://assets-bedu.org/images/Live_YT_12E.png",
-  date: "2022-01-13"
-}, {
-  id: 3,
-  title: 'Capacita a tu personal y genera lealtad con tus empleados',
-  picture: "https://assets-bedu.org/images/Live_Youtube.png",
-  date: "2022-01-02"
-}];
-module.exports = {
-  resolver
-};
+exports.resolvers = resolvers;

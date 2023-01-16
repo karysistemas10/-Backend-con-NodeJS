@@ -1,0 +1,4 @@
+2023-01-16T13:21:02 | error | Error al conectarse a la BD sequelize is not defined
+2023-01-16T13:21:02 | info | 🐈 Servidor corriendo en: 🔥 http://localhost:4000/,se inicializo en: development a las: Mon Jan 16 2023 13:21:02 GMT-0600 (Central Standard Time)
+2023-01-16T13:21:51 | error | Error al conectarse a la BD sequelize is not defined
+2023-01-16T13:21:51 | info | 🐈 Servidor corriendo en: 🔥 http://localhost:4000/,se inicializo en: development a las: Mon Jan 16 2023 13:21:51 GMT-0600 (Central Standard Time)
