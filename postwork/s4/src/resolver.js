@@ -9,10 +9,10 @@ const SALT_ROUNDS = 10
 
 export const resolvers = {
     Query: {
-      getAllLives: async (_, __, { token }) =>  verifyToken(token) && await sequelize.models.Book.findAll(),
+      getAllLives: async (_, __, { token }) =>  verifyToken(token) && await sequelize.models.Live.findAll(),
       getLive: async (_, { id }, { token }) => {
-        verifyToken(token)
-        return await sequelize.models.Book.findOne({
+        console.log(token)
+        return await sequelize.models.Live.findOne({
           where: { id } 
         })
       }
@@ -54,7 +54,7 @@ export const resolvers = {
         isAdmin: user.isAdmin
       }
       logger.info(`signIn: Usuario ${user.id} accedio`)
-      return sign(tokenData, process.env.JWT_SECRET, { expiresIn: 180 })
+      return sign(tokenData, process.env.JWT_SECRET, { expiresIn: '8h' })
     } else {
       logger.error(`signIn: Credenciales invalidas para ${email}`)
       throw new AuthenticationError('Invalid credentials')

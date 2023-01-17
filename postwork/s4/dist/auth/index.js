@@ -8,6 +8,7 @@ var _apolloServerErrors = require("apollo-server-errors");
 var _jsonwebtoken = require("jsonwebtoken");
 const verifyToken = token => {
   if (!token) throw new _apolloServerErrors.ApolloError('missing token');
+  console.log(process.env.JWT_SECRET, token);
   const decoded = (0, _jsonwebtoken.verify)(token, process.env.JWT_SECRET);
   return !!decoded;
 };

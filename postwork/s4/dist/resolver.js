@@ -9,21 +9,19 @@ var _logger = require("./logger");
 var _apolloServerErrors = require("apollo-server-errors");
 var _bcrypt = require("bcrypt");
 var _jsonwebtoken = require("jsonwebtoken");
-//import { verifyToken } from "./auth"
-
+var _auth = require("./auth");
 const SALT_ROUNDS = 10;
 const resolvers = {
   Query: {
     getAllLives: async (_, __, {
       token
-    }) => verifyToken(token) && (await _db.sequelize.models.Book.findAll()),
+    }) => (0, _auth.verifyToken)(token) && (await _db.sequelize.models.Live.findAll()),
     getLive: async (_, {
       id
     }, {
       token
     }) => {
       console.log(token);
-      // verifyToken(token)
       return await _db.sequelize.models.Live.findOne({
         where: {
           id
@@ -95,7 +93,7 @@ const resolvers = {
         };
         _logger.logger.info(`signIn: Usuario ${user.id} accedio`);
         return (0, _jsonwebtoken.sign)(tokenData, process.env.JWT_SECRET, {
-          expiresIn: 180
+          expiresIn: '8h'
         });
       } else {
         _logger.logger.error(`signIn: Credenciales invalidas para ${email}`);
