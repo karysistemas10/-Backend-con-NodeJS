@@ -8,12 +8,19 @@ var _resolver = require("./resolver");
 var _schema = require("./schema");
 const server = new _apolloServer.ApolloServer({
   typeDefs: _schema.typeDefs,
-  resolvers: _resolver.resolvers
+  resolvers: _resolver.resolvers,
+  context: async ({
+    req
+  }) => {
+    return {
+      token: req.headers.authorization
+    };
+  }
 });
 server.listen().then(({
   url
 }) => {
-  _logger.logger.info(`🐈 Servidor corriendo en: 🔥 ${url},se inicializo en: ${process.env.NODE_ENV} a las: ${new Date()}`);
+  _logger.logger.info(`🐈 Servidor corriendo en: 🔥 ${url},se inicializo en: ${process.env.NODE_ENV} a las: ${new Date().toISOString()}`);
 });
 const connection = async () => {
   try {
@@ -23,4 +30,3 @@ const connection = async () => {
     _logger.logger.error('Error al conectarse a la BD', error);
   }
 };
-//connection()

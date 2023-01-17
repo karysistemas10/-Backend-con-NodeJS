@@ -5,9 +5,17 @@ import { ApolloServer}from 'apollo-server'
 import {resolvers} from './resolver'
 import {typeDefs} from './schema'
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({ 
+  typeDefs,
+  resolvers,
+  context: async ({ req }) => {
+    return {
+      token: req.headers.authorization
+    }
+  }
+ })
 server.listen().then(({ url }) => {
-logger.info(`🐈 Servidor corriendo en: 🔥 ${url},se inicializo en: ${process.env.NODE_ENV} a las: ${new Date()}`)
+logger.info(`🐈 Servidor corriendo en: 🔥 ${url},se inicializo en: ${process.env.NODE_ENV} a las: ${new Date().toISOString()}`)
 })
 
 const connection = async () => {
@@ -20,5 +28,3 @@ const connection = async () => {
 
   }
 }
-//connection()
-

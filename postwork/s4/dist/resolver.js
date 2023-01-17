@@ -7,12 +7,23 @@ exports.resolvers = void 0;
 var _db = require("./db");
 var _logger = require("./logger");
 var _apolloServerErrors = require("apollo-server-errors");
+var _bcrypt = require("bcrypt");
+var _jsonwebtoken = require("jsonwebtoken");
+//import { verifyToken } from "./auth"
+
+const SALT_ROUNDS = 10;
 const resolvers = {
   Query: {
-    getAllLives: async () => await _db.sequelize.models.Live.findAll(),
+    getAllLives: async (_, __, {
+      token
+    }) => verifyToken(token) && (await _db.sequelize.models.Book.findAll()),
     getLive: async (_, {
       id
+    }, {
+      token
     }) => {
+      console.log(token);
+      // verifyToken(token)
       return await _db.sequelize.models.Live.findOne({
         where: {
           id
@@ -58,6 +69,38 @@ const resolvers = {
       // Actualizamos el libro
       liveFound.save();
       return liveFound;
+    },
+    signUp: async (_, {
+      input: user
+    }) => {
+      user.password = await (0, _bcrypt.hash)(user.password, SALT_ROUNDS);
+      return await _db.sequelize.models.User.create({
+        ...user
+      });
+    },
+    signIn: async (_, {
+      email,
+      password
+    }) => {
+      const user = await _db.sequelize.models.User.findOne({
+        where: {
+          email
+        }
+      });
+      if (user && (await (0, _bcrypt.compare)(password, user.password))) {
+        const tokenData = {
+          fullName: user.name + ' ' + user.lastname,
+          email,
+          isAdmin: user.isAdmin
+        };
+        _logger.logger.info(`signIn: Usuario ${user.id} accedio`);
+        return (0, _jsonwebtoken.sign)(tokenData, process.env.JWT_SECRET, {
+          expiresIn: 180
+        });
+      } else {
+        _logger.logger.error(`signIn: Credenciales invalidas para ${email}`);
+        throw new _apolloServerErrors.AuthenticationError('Invalid credentials');
+      }
     }
   }
 };
